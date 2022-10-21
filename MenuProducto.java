@@ -44,17 +44,17 @@ public class MenuProducto extends javax.swing.JFrame {
 
     }
     
-//REF#(5)______________________________________________________________________________
-    public void mostrar(int codigo, String producto, int cantidad, String fabricacion, String fecha) {
+//REF#(6)______________________________________________________________________________
+    public void mostrarmenu(int codigo, String producto, int cantidad, String fabricacion, String fecha) {
         //enviar datos de modificar a las cajitas
-        txtCaja1.setText(codigo);
+        txtCaja1.setText(codigo+""); // (codigo+"") se agrega comillas dobles para que se lea como un string
         txtCaja2.setText(producto);
-        txtCaja3.setText(cantidad);
+        txtCaja3.setText(cantidad+""); // (cantidad+"") se agrega comillas dobles para que se lea como un string
         txtCaja4.setText(fabricacion);
-        txtCaja4.setText(fecha);
+        txtCaja5.setText(fecha);
     }
     
-//______________________________________________________________________________
+//REF#(7)______________________________________________________________________________
     public void eliminar(){
     ProductoDAO eliminarDao = new ProductoDAO();
     eliminarDao.eliminar(Integer.parseInt(txtCaja1.getText()));
@@ -74,10 +74,10 @@ public class MenuProducto extends javax.swing.JFrame {
         txtCaja2 = new javax.swing.JTextField();
         txtCaja3 = new javax.swing.JTextField();
         txtCaja4 = new javax.swing.JTextField();
-        Crear = new javax.swing.JButton();
-        Mostrar = new javax.swing.JButton();
-        Modificar = new javax.swing.JButton();
-        Eliminar = new javax.swing.JButton();
+        CREATEP = new javax.swing.JButton();
+        READP = new javax.swing.JButton();
+        UPDATEP = new javax.swing.JButton();
+        DELETEP = new javax.swing.JButton();
         Salir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla_General = new javax.swing.JTable();
@@ -92,11 +92,11 @@ public class MenuProducto extends javax.swing.JFrame {
 
         jLabel2.setText("Codigo:");
 
-        jLabel3.setText("Nombre:");
+        jLabel3.setText("Producto:");
 
-        jLabel4.setText("Direccion:");
+        jLabel4.setText("Cantidad:");
 
-        jLabel5.setText("Telefono:");
+        jLabel5.setText("Fabricacion:");
 
         txtCaja1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,31 +110,31 @@ public class MenuProducto extends javax.swing.JFrame {
             }
         });
 
-        Crear.setText("Crear | C");
-        Crear.addActionListener(new java.awt.event.ActionListener() {
+        CREATEP.setText("Crear | C");
+        CREATEP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CrearActionPerformed(evt);
+                CREATEPActionPerformed(evt);
             }
         });
 
-        Mostrar.setText("Listar | R");
-        Mostrar.addActionListener(new java.awt.event.ActionListener() {
+        READP.setText("Listar | R");
+        READP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MostrarActionPerformed(evt);
+                READPActionPerformed(evt);
             }
         });
 
-        Modificar.setText("Modificar | U");
-        Modificar.addActionListener(new java.awt.event.ActionListener() {
+        UPDATEP.setText("Modificar | U");
+        UPDATEP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ModificarActionPerformed(evt);
+                UPDATEPActionPerformed(evt);
             }
         });
 
-        Eliminar.setText("Eliminar | D");
-        Eliminar.addActionListener(new java.awt.event.ActionListener() {
+        DELETEP.setText("Eliminar | D");
+        DELETEP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EliminarActionPerformed(evt);
+                DELETEPActionPerformed(evt);
             }
         });
 
@@ -156,24 +156,20 @@ public class MenuProducto extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(jLabel4))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel5)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCaja3, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtCaja4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel7)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtCaja5, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(9, 9, 9)
+                        .addComponent(jLabel4)
+                        .addGap(24, 24, 24)
+                        .addComponent(txtCaja3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCaja4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCaja5, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -185,8 +181,8 @@ public class MenuProducto extends javax.swing.JFrame {
                                 .addComponent(jLabel3)
                                 .addGap(27, 27, 27)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCaja2, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCaja1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtCaja1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCaja2))))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,27 +190,27 @@ public class MenuProducto extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(54, 54, 54)
-                                .addComponent(Crear, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Mostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Modificar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Eliminar))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel1)
-                                .addGap(86, 86, 86)))
+                            .addComponent(jLabel6)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(CREATEP, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(READP, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(UPDATEP)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(DELETEP)
+                        .addGap(46, 46, 46))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(81, 81, 81))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,21 +228,18 @@ public class MenuProducto extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCaja3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
                     .addComponent(txtCaja4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtCaja5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel7)))
-                .addGap(37, 37, 37)
+                    .addComponent(txtCaja5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Crear, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Mostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(UPDATEP, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CREATEP, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(READP, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DELETEP, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
                 .addComponent(jLabel6)
                 .addGap(2, 2, 2)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
@@ -266,52 +259,57 @@ public class MenuProducto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCaja3ActionPerformed
 
-    private void CrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearActionPerformed
-    //#codificando boton CREAR
+    private void CREATEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CREATEPActionPerformed
+    ////REF#(2) Codigo boton CREAR
         try {
             ProductoDAO cl = new ProductoDAO();        
-            cl.crear(Integer.parseInt(txtCaja1.getText()), txtCaja2.getText(), txtCaja3.getText(), Integer.parseInt(txtCaja4.getText()));
+            cl.crear(Integer.parseInt(txtCaja1.getText()), txtCaja2.getText(), Integer.parseInt(txtCaja3.getText()), txtCaja4.getText(), txtCaja5.getText() );
             txtCaja1.setText(null);
             txtCaja2.setText(null);
             txtCaja3.setText(null);
             txtCaja4.setText(null);
+            txtCaja5.setText(null);
         
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se puedo Crear el registro! "+e);
         }       
         Tabla();
-    }//GEN-LAST:event_CrearActionPerformed
+    }//GEN-LAST:event_CREATEPActionPerformed
 
-    private void MostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarActionPerformed
+    private void READPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_READPActionPerformed
         //#codificando boton MODIFICAR
-        txtCaja1.setEditable(false);
-        mostrar();
-    }//GEN-LAST:event_MostrarActionPerformed
-
-    private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
-    //#codificando boton MODIFICAR
-    
-  //txtCodigo.setEnabled(false);
+        //txtCaja1.setEditable(false);
         try {
-                ProductoDAO modificarid = new ProductoDAO();        
-                modificarid.modificar(Integer.parseInt(txtCaja1.getText()),txtCaja2.getText(), txtCaja3.getText(), Integer.parseInt(txtCaja4.getText()));
+            mostrar();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Operación realizada correctamente "+e);
+        }
+        
+    }//GEN-LAST:event_READPActionPerformed
+
+    private void UPDATEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UPDATEPActionPerformed
+    //REF#(3) codigo boton MODIFICAR
+        try {
+                ProductoDAO modificarmenu = new ProductoDAO();        
+                modificarmenu.modificar(Integer.parseInt(txtCaja1.getText()), txtCaja2.getText(), Integer.parseInt(txtCaja3.getText()), txtCaja4.getText(), txtCaja5.getText() );
                 txtCaja1.setText("");
                 txtCaja2.setText("");
                 txtCaja3.setText("");
                 txtCaja4.setText("");
+                txtCaja5.setText("");
             
         } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "No se puedo Modificar el registro! "+e);
         }
         Tabla(); //actualiza tabla
   
-    }//GEN-LAST:event_ModificarActionPerformed
+    }//GEN-LAST:event_UPDATEPActionPerformed
 
-    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
-    //#codificando boton ELIMINAR OTRA FORMA DE EJECUTAR
+    private void DELETEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DELETEPActionPerformed
+    //REF#(7) codigo boton ELIMINAR OTRA FORMA DE EJECUTAR
     
         try {
-            eliminar(); //otra forma de codificacion abajo esta el metodo completo.
+            eliminar();//REF#(7)
             txtCaja1.setText("");
             Tabla();
             System.out.println("Mensaje en consola: Registro eliminado");
@@ -319,7 +317,7 @@ public class MenuProducto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No se puedo eliminar el registro! "+e);
         }
 
-    }//GEN-LAST:event_EliminarActionPerformed
+    }//GEN-LAST:event_DELETEPActionPerformed
     
     private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
         // TODO add your handling code here:
@@ -358,20 +356,20 @@ public class MenuProducto extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //#CODIFICACION
-//              new Crear_vista().Tabla();
-                new MenuProducto().setVisible(true);
+
+            //REF#(8)
+               new MenuProducto().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Crear;
-    private javax.swing.JButton Eliminar;
-    private javax.swing.JButton Modificar;
-    private javax.swing.JButton Mostrar;
+    private javax.swing.JButton CREATEP;
+    private javax.swing.JButton DELETEP;
+    private javax.swing.JButton READP;
     private javax.swing.JButton Salir;
     private javax.swing.JTable Tabla_General;
+    private javax.swing.JButton UPDATEP;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

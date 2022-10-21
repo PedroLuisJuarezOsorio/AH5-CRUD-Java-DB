@@ -17,7 +17,7 @@ public class ProductoDAO {
     Connection con;    
     Conexiondb acceso = new Conexiondb();
  
-//REF#(1) LISTAR PRODUCTOS DE TABLA DB
+//REF#(1) READ - LISTAR PRODUCTOS DE TABLA DB
     public ArrayList listar(){
         String sql = "SELECT * FROM producto";
         try{
@@ -55,7 +55,7 @@ public class ProductoDAO {
     return null;    
     }
     
-//REF#(2) CREAR UN REGISTRO EN LA TABLA BD
+//REF#(2) CREATE - CREAR UN REGISTRO EN LA TABLA BD
     
     public void crear(int codigo, String producto, int cantidad, String fabricacion, String fecha){
         String sql = "insert into producto (codigo, desc_producto, cantidad, fabri_origen, fechaingreso) value (?,?,?,?,?)";
@@ -73,7 +73,7 @@ public class ProductoDAO {
         }catch(Exception e){
         }        
     } 
-//REF#(3) MODIFICAR UN REGISTRO DE LA TABLA BD
+//REF#(3) UPDATE - MODIFICAR UN REGISTRO DE LA TABLA BD
      public void modificar(int codigo, String producto, int cantidad, String fabricacion, String fecha) {
         String sql = "update producto set desc_producto=?, cantidad=?, fabri_origen=?, fechaingreso=? where codigo=?;";
         try {
@@ -82,15 +82,15 @@ public class ProductoDAO {
             ps.setString(1, producto);
             ps.setInt(2, cantidad);
             ps.setString(3, fabricacion);
-            ps.setString(4, fabricacion);
-            ps.setString(5, fecha);
+            ps.setString(4, fecha);
+            ps.setInt(5, codigo);
             ps.executeUpdate();
         } catch (Exception e) {
         }
     }
 
      
-//REF#(4) ELIMINAR UN REGISTRO DE LA TABLA BD
+//REF#(4) DELETE - ELIMINAR UN REGISTRO DE LA TABLA BD
     public void eliminar(int codigo) {
         String sql = "delete from producto where codigo=?";
         try {
@@ -112,14 +112,14 @@ public class ProductoDAO {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             if (rs.next()) {
+            //REF#(6)
                 MenuProducto mv = new MenuProducto();
-                mv.mostrar(rs.getInt(1));
-                //mv.mostrar(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4));
+                mv.mostrarmenu(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5));
                 mv.setVisible(true);
             }else{
                 System.out.println("Codigo invalido");
             }
-        } catch (Exception e) {
+        } catch (Exception e) {            
         }
         
     }
